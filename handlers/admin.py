@@ -93,3 +93,28 @@ async def handle_message(update: Update,
         )
 
         return
+    # -------------------------
+    # لیست
+    # -------------------------
+
+    if text == "📂 لیست GIFها":
+
+        gifs = list_gifs()
+
+        if not gifs:
+
+            await update.message.reply_text(
+                "هیچ GIFی ثبت نشده."
+            )
+
+            return
+
+        msg = ""
+
+        for code, downloads in gifs:
+
+            msg += f"• {code} | دانلود: {downloads}\n"
+
+        await update.message.reply_text(msg)
+
+        return
