@@ -46,3 +46,50 @@ async def handle_message(update: Update,
     # -------------------------
 
     text = update.message.text
+    # -------------------------
+    # افزودن GIF
+    # -------------------------
+
+    if text == "➕ افزودن GIF":
+
+        waiting_for_gif[user_id] = True
+
+        await update.message.reply_text(
+            "🎬 GIF را ارسال کن."
+        )
+
+        return
+
+    # -------------------------
+    # ذخیره کد
+    # -------------------------
+
+    if user_id in waiting_for_code:
+
+        code = text.strip()
+
+        file_id = waiting_for_code[user_id]
+
+        try:
+
+            add_gif(code, file_id)
+
+        except Exception:
+
+            await update.message.reply_text(
+                "❌ این کد قبلاً ثبت شده."
+            )
+
+            return
+
+        waiting_for_code.pop(user_id)
+
+        link = f"https://t.me/{BOT_USERNAME}?start={code}"
+
+        await update.message.reply_text(
+            f"""✅ GIF ذخیره شد.
+
+🔗 {link}"""
+        )
+
+        return
