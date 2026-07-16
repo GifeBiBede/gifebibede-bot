@@ -42,9 +42,17 @@ def get_gif(code):
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT file_id FROM gifs WHERE code=?",
-        (code,)
-    )
+    """
+    SELECT
+        id,
+        code,
+        file_id,
+        downloads
+    FROM gifs
+    WHERE code=?
+    """,
+    (code,)
+)
 
     result = cur.fetchone()
 
