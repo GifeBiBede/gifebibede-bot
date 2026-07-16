@@ -100,3 +100,19 @@ def list_gifs():
     conn.close()
 
     return data
+def get_all_stats():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT
+            COUNT(*),
+            SUM(downloads)
+        FROM gifs
+    """)
+
+    data = cur.fetchone()
+
+    conn.close()
+
+    return data
