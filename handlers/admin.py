@@ -6,7 +6,8 @@ from keyboards import admin_keyboard
 from database import (
     add_gif,
     list_gifs,
-    delete_gif
+    delete_gif,
+    get_all_stats,
 )
 
 # حافظه موقت
